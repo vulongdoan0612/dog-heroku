@@ -1,577 +1,571 @@
 const express = require("express");
 const path = require("path");
 const app = express();
-// const dogs = [
-//   // {
-//   //   id: 1,
-//   //   name: "Tini",price:"",price:"",
-//   //   breed: "CHIHUAHUA",
-//   //   price: "1000",
-//   //   description: "This is a crazy tiny dog with big alien eyes",
-//   //   imageUrl:
-//   //     "https://images.unsplash.com/photo-1605639156481-244775d6f803?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
-//   // },
-//   // {
-//   //   id: 2,
-//   //   name: "Butty",
-//   //   breed: "CORGI",
-//   //   price: "1500",
-//   //   description: "This is a cute dog with a heart-shaped butt",
-//   //   imageUrl:
-//   //     "https://images.unsplash.com/photo-1597633425046-08f5110420b5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-//   // },
-//   // {
-//   //   id: 3,
-//   //   name: "Pity",
-//   //   breed: "PITBULL",
-//   //   price: "2500",
-//   //   description:
-//   //     "A dangerous breed but everyone loves to have one of them cause they look cool",
-//   //   imageUrl:
-//   //     "https://images.unsplash.com/photo-1571868094976-6af3b50b43bc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-//   // },
-//   // {
-//   //   id: 4,
-//   //   name: "Puggy",
-//   //   breed: "PUG",
-//   //   price: "1700",
-//   //   description:
-//   //     "A sad looking dog that actually very energetic and love being cuddled",
-//   //   imageUrl:
-//   //     "https://images.unsplash.com/photo-1535909339361-ef56e179d637?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-//   // },
-//   // {
-//   //   id: 5,
-//   //   name: "Mally",
-//   //   breed: "MALTESE",
-//   //   price: "2000",
-//   //   description: "A maltese dog",
-//   //   imageUrl:
-//   //     "https://images.unsplash.com/photo-1508532566027-b2032cd8a715?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8bWFsdGVzZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60",
-//   // },
-//   // {
-//   //   id: 6,
-//   //   name: "Dachy",
-//   //   breed: "DASCHUND",
-//   //   price: "2700",
-//   //   description: "A dog looks like a sausage",
-//   //   imageUrl:
-//   //     "https://images.unsplash.com/photo-1612195583950-b8fd34c87093?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZGFzY2h1bmR8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60",
-//   // },
-//   // {
-//   //   id: 7,
-//   //   name: "Ngao",
-//   //   breed: "HUSKY",
-//   //   price: "2500",
-//   //   description: "A dog looks like a wolf",
-//   //   imageUrl:
-//   //     "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fGh1c2t5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60",
-//   // },
-//   // {
-//   //   id: 8,
-//   //   name: "Boxy",
-//   //   breed: "BOXER",
-//   //   price: "4700",
-//   //   description: "A dog knows how to fight",
-//   //   imageUrl:
-//   //     "https://images.unsplash.com/photo-1543071220-6ee5bf71a54e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Ym94ZXIlMjBkb2d8ZW58MHx8MHx8&auto=format&fit=crop&w=600&q=60",
-//   // },
-//   {
-//     id: 1,
-//     breed: "Affenpinscher",
-//     name: "Max",
-//     imageUrl: "https://images.dog.ceo/breeds/hound-afghan/n02088094_11172.jpg",
-//     price: "277",
-//     description:
-//       "All dogs can be traced back 40 million years ago to a weasel-like animal called the Miacis which dwelled in trees and dens. The Miacis later evolved into the Tomarctus, a direct forbear of the genus Canis, which includes the wolf and jackal as well as the dog.",
-//   },
-//   {
-//     id: 2,
-//     breed: "Afghan Hound",
-//     name: "Buddy",
-//     imageUrl: "https://images.dog.ceo/breeds/hound-afghan/n02088094_11182.jpg",
-//     price: "888",
-//     description:
-//       "Ancient Egyptians revered their dogs. When a pet dog would die, the owners shaved off their eyebrows, smeared mud in their hair, and mourned aloud for days.",
-//   },
-//   {
-//     id: 3,
-//     breed: "African Hunting Dog",
-//     name: "Charlie",
-//     imageUrl: "https://images.dog.ceo/breeds/hound-afghan/n02088094_1126.jpg",
-//     price: "234",
-//     description:
-//       "Small quantities of grapes and raisins can cause renal failure in dogs. Chocolate, macadamia nuts, cooked onions, or anything with caffeine can also be harmful.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-afghan/n02088094_1128.jpg",
-//     price: "641",
-//     id: 4,
-//     breed: "Airedale Terrier",
-//     name: "Jack",
+const dogs = [
+  {
+    breed: "afador",
+    image:
+      "https://cdn2-www.dogtime.com/assets/uploads/2019/08/afador-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Afador is a mixed breed dog–a cross between the Afghan Hound and Labrador Retriever dog breeds. Loyal, energetic, and affectionate, these pups inherited some of the best qualities from both of their parents.",
 
-//     description:
-//       "Apple and pear seeds contain arsenic, which may be deadly to dogs.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11136.jpg",
-//     price: "436",
-//     id: 5,
-//     breed: "Akbash Dog",
-//     name: "Cooper",
+    height: "20 to 29 inches",
+    weight: "50 to 75 pounds",
+    life: "10 to 12 years",
+    breedGroup: "mixed breed dogs",
 
-//     description:
-//       "Rock star Ozzy Osborne saved his wife Sharon’s Pomeranian from a coyote by tackling ad wresting the coyote until it released the dog.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11148.jpg",
-//     price: "436",
-//     id: 6,
-//     breed: "Akita",
-//     name: "Rocky",
+    id: "5eaff43af96b5978ca726ccc",
+  },
+  {
+    breed: "affenpinscher",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_23096_affenpinscher-300x189.jpg",
+    description:
+      "Canines in the Affenpinscher dog breed were originally created to be ratters in homes, stables, and shops. Bred down in size, they moved up in the world, becoming ladies’ companions. Today, they are happy, mischievous companion dogs.",
 
-//     description: "Dogs have sweat glands in between their paws.",
+    height: "9 inches to 11 inches tall at the shoulder",
+    weight: "7 to 9 pounds",
+    life: "12 to 14 years",
+    breedGroup: "companion dogs",
 
-//     description:
-//       'In 2003, Dr. Roger Mugford invented the "wagometer," a device that claims to interpret a dog’s exact mood by measuring the wag of its tail.',
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11200.jpg",
-//     price: "672",
-//     id: 7,
-//     breed: "Alapaha Blue Blood Bulldog",
-//     name: "Toby",
+    id: "5eaff43af96b5978ca726ccd",
+  },
+  {
+    breed: "affenhuahua",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2020/02/affenhuahua-mixed-dog-breed-pictures-COVER-650x368.jpg",
+    description:
+      "The Affenhuahua is a mixed breed dog–a cross between the Chihuahua and Affenpinscher dog breeds. Petite, sassy, and highly energetic, these pups inherited some of the best traits from both of their parents.",
 
-//     description:
-//       'Dogs have three eyelids. The third lid, called a nictitating membrane or "haw," keeps the eye lubricated and protected.',
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11204.jpg",
-//     price: "123",
-//     id: 8,
-//     breed: "Alaskan Husky",
-//     name: "Tucker",
+    height: "6 to 12 inches",
+    weight: "4 to 12 pounds",
+    life: "13 to 18 years",
+    breedGroup: "mixed breed dogs",
 
-//     description:
-//       "A dog’s shoulder blades are unattached to the rest of the skeleton to allow greater flexibility for running.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11223.jpg",
-//     price: "323",
-//     id: 9,
-//     breed: "Alaskan Malamute",
-//     name: "Jake",
+    id: "5eaff43af96b5978ca726ccf",
+  },
+  {
+    breed: "akbash",
+    image:
+      "https://cdn2-www.dogtime.com/assets/uploads/2019/12/akbash-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Akbash is a rare, purebred dog from the country of Turkey. Loyal, alert, and intelligent, these pups have some of the best qualities you could ask for.",
 
-//     description:
-//       "Puppies are sometimes rejected by their mother if they are born by cesarean and cleaned up before being given back to her.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11281.jpg",
-//     price: "55",
-//     id: 10,
-//     breed: "American Bulldog",
-//     name: "Riley",
+    height: "27 to 34 inches",
+    weight: "75 to 140 pounds",
+    life: "10 to 12 years",
+    breedGroup: "working dogs",
 
-//     description:
-//       'The phrase "raining cats and dogs" originated in seventeenth-century England. During heavy rainstorms, many homeless animals would drown and float down the streets, giving the appearance that it had actually rained cats and dogs.',
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11635.jpg",
-//     price: "15",
-//     id: 11,
-//     breed: "American Bully",
-//     name: "Oliver",
+    id: "5eaff43af96b5978ca726cd0",
+  },
+  {
+    breed: "labradane",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2019/07/labradane-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Labradane is a mixed breed dog–a cross between the Labrador Retriever and Great Dane dog breeds. Loyal, affectionate, and playful, these pups inherited some of the best qualities from both of their parents.",
 
-//     description:
-//       "During the Middle Ages, Great Danes and Mastiffs were sometimes suited with armor and spiked collars to enter a battle or to defend supply caravans.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11846.jpg",
-//     price: "22",
-//     id: 12,
-//     breed: "American Eskimo Dog",
-//     name: "Teddy",
+    height: "24 to 30 inches",
+    weight: "100 to 180 pounds",
+    life: "8 to 12 years",
+    breedGroup: "mixed breed dogs",
 
-//     description:
-//       "Pekingese and Japanese Chins were so important in the ancient Far East that they had their own servants and were carried around trade routes as gifts for kings and emperors. Pekingese were even worshipped in the temples of China for centuries.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_11849.jpg",
-//     price: "200",
-//     id: 13,
-//     breed: "American Eskimo Dog (Miniature)",
-//     name: "Duke",
+    id: "5eaff43af96b5978ca726db7",
+  },
+  {
+    breed: "lancashire heeler",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23282_lancashire-heeler-300x189.jpg",
+    description:
+      "The Lancashire Heeler was once used to drive livestock to market and hunt rats and rabbits at home, but is now a popular companion dog breed in their native Britain.",
 
-//     description:
-//       "The shape of a dog’s face suggests how long it will live. Dogs with sharp, pointed faces that look more like wolves typically live longer. Dogs with very flat faces, such as bulldogs, often have shorter lives.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_13199.jpg",
-//     price: "250",
-//     id: 14,
-//     breed: "American Foxhound",
-//     name: "Bear",
+    height: "10 inches to 1 foot tall at the shoulder",
+    weight: "13 to 15 pounds",
+    life: "9 to 14 years",
+    breedGroup: "herding dogs",
 
-//     description:
-//       "The ancient Mbaya Indians of the Gran Chaco in South America believed that humans originally lived underground until dogs dug them up.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_13222.jpg",
-//     price: "142",
-//     id: 15,
-//     breed: "American Pit Bull Terrier",
-//     name: "Bentley",
+    id: "5eaff43af96b5978ca726dbc",
+  },
+  {
+    breed: "dandie dinmont terrier",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_23064_dandie-dinmont-terrier-300x189.jpg",
+    description:
+      "Dandie Dinmont Terriers originally were bred to hunt otter and badger. Nicknamed the gentleman of the terrier family, he is calm and reserved, yet retains his terrier tenacity and love of the hunt. His small size and moderate exercise needs make him well suited to both city and country homes.",
 
-//     description:
-//       "The Mayans and Aztecs symbolized every tenth day with the dog, and those born under this sign were believed to have outstanding leadership skills",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-basset/n02088238_13373.jpg",
-//     price: "189",
-//     id: 16,
-//     breed: "American Staffordshire Terrier",
-//     name: "Milo",
+    height: "8 inches to 11 inches tall at the shoulder",
+    weight: "18 to 24 pounds",
+    life: "12 to 15 years",
+    breedGroup: "terrier dogs",
 
-//     description:
-//       "The most dogs ever owned by one person were 5,000 Mastiffs owned by Kublai Khan.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_12388.jpg",
-//     price: "175",
-//     id: 17,
-//     breed: "American Water Spaniel",
-//     name: "Bentley",
+    id: "5eaff43af96b5978ca726d5c",
+  },
+  {
+    breed: "doberman pinscher",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_22920_doberman-pinscher-300x189.jpg",
+    description:
+      "The Doberman Pinscher originated in Germany during the late 19th century, mostly bred as a guard dog. Their exact ancestry is unknown, but they’re believed to be a mixture of many dog breeds, including the Rottweiler, Black and Tan Terrier, and German Pinscher.",
 
-//     description:
-//       "The American Kennel Club, the most influential dog club in the United States, was founded in 1884.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_1262.jpg",
-//     price: "592",
-//     id: 18,
-//     breed: "Anatolian Shepherd Dog",
-//     name: "Bailey",
+    height: "24 to 28 inches tall at the shoulder",
+    weight: "60 to 80 pounds",
+    life: "10 to 13 years",
+    breedGroup: "working dogs",
 
-//     description:
-//       "The most popular male dog breeds are Max and Jake. The most popular female dog breeds are Maggie and Molly.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_2908.jpg",
-//     price: "480",
-//     id: 19,
-//     breed: "Appenzeller Sennenhund",
-//     name: "Riley",
+    id: "5eaff43af96b5978ca726d5d",
+  },
+  {
+    breed: "dogue de bordeaux",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23252_dogue-de-bordeaux-dog-breed-300x189.jpg",
+    description:
+      "This dog breed‘s most famous member co-starred with Tom Hanks in the 1989 movie, Turner and Hooch. Loyal, self-assured, and territorial, the Dogue de Bordeaux requires lots of training and socialization.",
 
-//     description:
-//       "Scholars have argued over the metaphysical interpretation of Dorothy’s pooch, Toto, in the Wizard of Oz. One theory postulates that Toto represents Anubis, the dog-headed Egyptian god of death, because Toto consistently keeps Dorothy from safely returning home.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_4054.jpg",
-//     price: "427",
-//     id: 21,
-//     breed: "Australian Cattle Dog",
-//     name: "Winston",
+    height: "1 foot, 11 inches to 2 feet, 3 inches tall at the shoulder",
+    weight: "starts at 100 pounds",
+    life: "8 to 12 years",
+    breedGroup: "working dogs",
 
-//     description:
-//       "Weird dog laws include allowing police offers in Palding, Ohio, to bite a dog to quiet it. In Ventura County, California, cats and dogs are not allowed to have sex without a permit.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_4169.jpg",
-//     price: "499",
-//     id: 22,
-//     breed: "Australian Kelpie",
-//     name: "Dexter",
+    id: "5eaff43af96b5978ca726d60",
+  },
+  {
+    breed: "leonberger",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23272_leonberger-dog-breed-300x189.jpg",
+    description:
+      "This jumbo-sized dog breed is a mix of Newfie, longhaired Saint Bernard, and Great Pyrenees.",
 
-//     description:
-//       "The first dog chapel was established in 2001. It was built in St. Johnsbury, Vermont, by Stephan Huneck, a children’s book author whose five dogs helped him recuperate from a serious illness.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_9579.jpg",
-//     price: "895",
-//     id: 23,
-//     breed: "Australian Shepherd",
-//     name: "Cody",
+    height: "2 feet, 1 inch to 2 feet, 7 inches tall at the shoulder",
+    weight: "120 to 170 pounds",
+    life: "10 to 12 years",
+    breedGroup: "working dogs",
 
-//     description:
-//       "Those born under the sign of the dog in Chinese astrology are considered to be loyal and discreet, though slightly temperamental.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_9616.jpg",
-//     price: "1050",
-//     id: 24,
-//     breed: "Australian Terrier",
-//     name: "Buster",
+    id: "5eaff43af96b5978ca726dbd",
+  },
+  {
+    breed: "azawakh",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_23286_azawakh-300x189.jpg",
+    description:
+      "A dog breed named for the Azawakh Valley in the Sahara desert where they originated, this is a lean and swift hunter with a regal presence.",
 
-//     description:
-//       "Service dogs are trained to know when they are on duty. When their harness is on, they know it's business time. When you take it off, the pups immediately become playful and energetic.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_9691.jpg",
-//     price: "245",
-//     id: 25,
-//     breed: "Azawakh",
-//     name: "Oscar",
+    height: "1 foot, 11 inches to 2 feet, 5 inches tall at the shoulder",
+    weight: "33 to 55 pounds",
+    life: "12 to 15 years",
+    breedGroup: "hound dogs",
 
-//     description:
-//       "The Mayans and Aztecs symbolized every tenth day with the dog, and those born under this sign were believed to have outstanding leadership skills.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_9695.jpg",
-//     price: "288",
-//     id: 26,
-//     breed: "Barbet",
-//     name: "Lucky",
+    id: "5eaff43af96b5978ca726cec",
+  },
+  {
+    breed: "australian shepherd lab mix",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2019/12/australian-shepherd-lab-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Australian Shepherd Lab Mix is a mixed breed dog–a cross between the Australian Shepherd and the Labrador Retriever dog breeds. Medium in size, energetic, and loyal, these pups inherited some amazing traits from both of their parents.",
 
-//     description:
-//       "The ancient Mbaya Indians of the Gran Chaco in South America believed that humans originally lived underground until dogs dug them up.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_9697.jpg",
-//     price: "313",
-//     id: 28,
-//     breed: "Basenji",
-//     name: "Leo",
+    height: "22 to 25 inches",
+    weight: "40 to 80 pounds",
+    life: "12 to 15 years",
+    breedGroup: "mixed breed dogs",
 
-//     description:
-//       "The first dogs were self-domesticated wolves which, at least 12,000 years ago, became attracted to the first sites of permanent human habitation.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-blood/n02088466_9792.jpg",
-//     price: "263",
-//     id: 29,
-//     breed: "Basset Bleu de Gascogne",
-//     name: "Zeus",
+    id: "5eaff43af96b5978ca726ced",
+  },
+  {
+    breed: "barbet",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23288_barbet-300x189.jpg",
+    description:
+      "This woolly sporting dog breed is fun-loving and smart. The Barbet was bred for retrieving waterfowl for hunters—and has the webbed feet to prove it—but they’re also a talented agility competitor in their native France.",
 
-//     description:
-//       "Laika, a Russian stray, was the first living mammal to orbit the Earth, in the Soviet Sputnik spacecraft in 1957. Though she died in space, her daughter Pushnika had four puppies with President John F. Kennedy’s terrier, Charlie.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1078.jpg",
-//     price: "375",
-//     id: 30,
-//     breed: "Basset Hound",
-//     name: "Louie",
+    height: "1 foot, 8 inches to 2 feet, 1 inch tall at the shoulder",
+    weight: "37 to 62 pounds",
+    life: "13 to 15 years",
+    breedGroup: "sporting dogs",
 
-//     description:
-//       "The earliest European images of dogs are found in cave paintings dating back 12,000 years ago in Spain.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1106.jpg",
-//     price: "381",
-//     id: 31,
-//     breed: "Beagle",
-//     name: "Sam",
+    id: "5eaff43af96b5978ca726cef",
+  },
+  {
+    breed: "bavarian mountain scent hound",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2019/09/Bavarian-Mountain-Scent-Hound-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Bavarian Mountain Scent Hound is a purebred dog originally from Germany. These pups are loyal, intelligent, and reserved, which are some of the best qualities for a Hound dog breed.",
 
-//     description:
-//       'In ancient Greece, kennels of dogs were kept at the sanctuary of Asclepius at Epidaurus. Dogs were frequently sacrificed there because they were plentiful, inexpensive, and easy to control. During the July 25 celebration of the kunophontis "the massacre of dogs", dog sacrifices were performed to appease the ancestors of Apollo’s son, Linos, who was devoured by dogs..',
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1132.jpg",
-//     price: "300",
-//     id: 32,
-//     breed: "Bearded Collie",
-//     name: "Harley",
+    height: "17 to 20 inches.",
+    weight: "44 to 55 pounds.",
+    life: "10 to 14 years.",
+    breedGroup: "hound dogs",
 
-//     description:
-//       "Hollywood’s first and arguably best canine superstar was Rin Tin Tin, a five-day-old German Shepherd found wounded in battle in WWI France and adopted by an American soldier, Lee Duncan. He would sign his own contracts with his paw print.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1232.jpg",
-//     price: "303",
-//     id: 33,
-//     breed: "Beauceron",
-//     name: "Baxter",
+    id: "5eaff43af96b5978ca726cf3",
+  },
+  {
+    breed: "golden mountain dog",
+    image:
+      "https://cdn2-www.dogtime.com/assets/uploads/2019/10/golden-mountain-dog-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Golden Mountain Dog is a mixed breed dog–a cross between the Golden Retriever and Bernese Mountain Dog breeds. Gentle, friendly and intelligent, these pups inherited some of the best qualities from both of their parents.",
 
-//     description:
-//       "In Egypt, a person bitten by a rabid dog was encouraged to eat the roasted liver of a dog infected with rabies to avoid contracting the disease. The tooth of a dog infected with rabies would also be put in a band tied to the arm of the person bitten. The menstrual blood of a female dog was used for hair removal, while dog genitals were used for preventing the whitening of hair.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1352.jpg",
-//     price: "150",
-//     id: 34,
-//     breed: "Bedlington Terrier",
-//     name: "Henry",
+    height: "24 to 28 inches",
+    weight: "75 to 120 pounds",
+    life: "9 to 15 years",
+    breedGroup: "mixed breed dogs",
 
-//     description:
-//       "The breeds of 77 ancient Egyptian dogs have been recorded. The breeds refer to color and character, such as Blackie, Ebony, Good Herdsman, Reliable, and Brave One.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1381.jpg",
-//     price: "105",
-//     id: 36,
-//     breed: "Belgian Malinois",
-//     name: "Peanut",
+    id: "5eaff43af96b5978ca726d89",
+  },
+  {
+    breed: "gollie",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2019/09/gollie-mixed-dog-breed-pictures-1-1-650x368.jpg",
+    description:
+      "The Gollie is a mixed breed dog–a cross between the Golden Retriever and Collie dog breeds. Loving, clever, and energetic, these pups inherited some of the best qualities from both of their parents.",
 
-//     description:
-//       "Service dogs are trained to know when they are on duty. When their harness is on, they know it's business time. When you take it off, the pups immediately become playful and energetic.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_140.jpg",
-//     price: "190",
-//     id: 38,
-//     breed: "Belgian Tervuren",
-//     name: "Shadow",
+    height: "22 to 26 inches",
+    weight: "50 to 75 pounds",
+    life: "12 to 15 years",
+    breedGroup: "mixed breed dogs",
 
-//     description:
-//       "In early Christian tradition, Saint Christopher, the patron saint of travelers, is sometimes depicted with a dog’s head.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1623.jpg",
-//     price: "110",
-//     id: 41,
-//     breed: "Bernese Mountain Dog",
-//     name: "Tank",
+    id: "5eaff43af96b5978ca726d8e",
+  },
+  {
+    breed: "hamiltonstovare",
+    image:
+      "https://cdn2-www.dogtime.com/assets/uploads/2019/12/Hamiltonstovare-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Hamiltonstovare is a purebred dog from Sweden. These agile, affectionate, active pups have some of the best dog qualities of any dog breed around today.",
 
-//     description:
-//       "During the Renaissance, detailed portraits of the dog as a symbol of fidelity and loyalty appeared in mythological, allegorical, and religious art throughout Europe, including works by Leonardo da Vinci, Diego Velázquez, Jan van Eyck, and Albrecht Durer.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1690.jpg",
-//     price: "100",
-//     id: 42,
-//     breed: "Bichon Frise",
-//     name: "Ollie",
+    height: "19 to 24 inches",
+    weight: "40 to 75 pounds",
+    life: "14 to 17 years",
+    breedGroup: "hound dogs",
 
-//     description:
-//       "The earliest European images of dogs are found in cave paintings dating back 12,000 years ago in Spain.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_1701.jpg",
-//     price: "20",
-//     id: 43,
-//     breed: "Black and Tan Coonhound",
-//     name: "Joey",
+    id: "5eaff43af96b5978ca726d92",
+  },
+  {
+    breed: "great pyrenees",
+    image:
+      "https://cdn2-www.dogtime.com/assets/uploads/2011/01/file_23202_great-pyrenees-300x189.jpg",
+    description:
+      "The Great Pyrenees dog breed‘s goal in life is to protect sheep, goats, livestock, people, children, grass, flowers, the moon, the lawn furniture, bird feeders, and any real or imaginary predators that may intrude on your personal space. Oh yeah, and to give, give, and give unconditional love. Anyone who has seen this stunning white dog becomes enamored. What’s not to like? He has a strong build, a beautiful, thick coat, and he exudes elegance and majesty. One look and you can see the intelligence and steady temperament that many seek in a good family dog.",
 
-//     description:
-//       "During the Renaissance, detailed portraits of the dog as a symbol of fidelity and loyalty appeared in mythological, allegorical, and religious art throughout Europe, including works by Leonardo da Vinci, Diego Velázquez, Jan van Eyck, and Albrecht Durer.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_251.jpg",
-//     price: "25",
-//     id: 45,
-//     breed: "Bloodhound",
-//     name: "Bo",
+    height: "2 feet, 1 inch to 2 feet, 8 inches tall at the shoulder",
+    weight: "85 to 160 pounds",
+    life: "10 to 12 years",
+    breedGroup: "working dogs",
 
-//     description:
-//       "In Croatia, scientists discovered that lampposts were falling down because a chemical in the urine of male dogs was rotting the metal.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_255.jpg",
-//     price: "500",
-//     id: 47,
-//     breed: "Bluetick Coonhound",
-//     name: "Otis",
+    id: "5eaff43af96b5978ca726d8f",
+  },
+  {
+    breed: "gordon setter",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_22982_gordon-setter-300x189.jpg",
+    description:
+      "Originally bred to hunt pheasant and quail, Gordon Setters are still fine hunting companions and field trial competitors. Canines of this breed also compete in obedience, conformation, and agility, and they’re terrific family companion dogs.",
 
-//     description:
-//       "Service dogs are trained to know when they are on duty. When their harness is on, they know it's business time. When you take it off, the pups immediately become playful and energetic.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-english/n02089973_2551.jpg",
-//     price: "351",
-//     id: 48,
-//     breed: "Boerboel",
-//     name: "Hank",
+    height: "1 foot, 11 inches to 2 feet, 3 inches tall at the shoulder",
+    weight: "45 to 80 pounds",
+    life: "10 to 12 years",
+    breedGroup: "sporting dogs",
 
-//     description:
-//       "Service dogs are trained to know when they are on duty. When their harness is on, they know it's business time. When you take it off, the pups immediately become playful and energetic.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_1787.jpg",
-//     price: "122",
-//     id: 50,
-//     breed: "Border Collie",
-//     name: "Roscoe",
+    id: "5eaff43af96b5978ca726d90",
+  },
+  {
+    breed: "beabull",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2019/12/beabull-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Beabull is a mixed breed dog–a cross between the Beagle and the English Bulldog breeds. Loyal, curious, and loving, these pups inherited some of the best qualities from both of their parents.",
 
-//     description:
-//       "When Lord Byron was informed that his dog was not allowed to come with him to Cambridge Trinity College, he retaliated by bringing a bear instead.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_1790.jpg",
-//     price: "355",
-//     id: 51,
-//     breed: "Border Terrier",
-//     name: "Jasper",
+    height: "12 to 16 inches",
+    weight: "30 to 60 pounds",
+    life: "10 to 13 years",
+    breedGroup: "mixed breed dogs",
 
-//     description:
-//       "It is a myth that dogs are color blind. They can actually see in color, just not as vividly as humans. It is akin to our vision at dusk.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_180.jpg",
-//     price: "164",
-//     id: 53,
-//     breed: "Boston Terrier",
-//     name: "Brody",
+    id: "5eaff43af96b5978ca726cf4",
+  },
+  {
+    breed: "bossie",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2019/11/bossie-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Bossie is a mixed breed dog–a cross between the Boston Terrier and Australian Shepherd dog breeds. Medium in size, energetic, and loyal, these pups inherited some of the best qualities from both of their parents.",
 
-//     description:
-//       "'Frito Feet' is the breed of the phenomenon in which the bacteria on a dog's paws cause them to smell like corn chips. Because a pup's feet are in constant contact with the ground, they pick up tons of microorganisms in their paws. When dogs cool off by sweating through the pads of their feet, the combo of moisture and bacteria releaces a nutty, popcorn-like aroma. Basically it's dog B.O.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_1824.jpg",
-//     price: "268",
-//     id: 54,
-//     breed: "Bouvier des Flandres",
-//     name: "Marley",
+    height: "15 to 23 inches",
+    weight: "25 to 40 pounds",
+    life: "12 to 15 years",
+    breedGroup: "mixed breed dogs",
 
-//     description:
-//       "Baks the blind boxer has a seeing eye goose breedd Buttons. Buttons the four-year-old goose leads her pup around everywhere either by hanging onto him with her neck, or by honking to tell him which way to go.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_183.jpg",
-//     price: "634",
-//     id: 55,
-//     breed: "Boxer",
-//     name: "Bandit",
+    id: "5eaff43af96b5978ca726d15",
+  },
+  {
+    breed: "bouvier des flandres",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23180_bouvier-des-flandres-300x189.jpg",
+    description:
+      "The Bouvier des Flandres was originally bred to be a versatile farm dog. He helped farmers in a multitude of tasks, including herding livestock (particularly cattle), pulling carts, and guarding. The hard-working and intelligent Bouvier is still an ideal farm dog, as well as a capable service, assistance, law enforcement, and guard dog. And while you can also find him competing in obedience, agility, and herding trials, serving as family companion is the role that seems to suit him best.",
 
-//     description:
-//       "An American Animal Hospital Association poll found that 33 of dog owners admit to talking to their dogs on the phone and leaving answering machine messages for them while away.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_1863.jpg",
-//     price: "733",
-//     id: 56,
-//     breed: "Boykin Spaniel",
-//     name: "Boomer",
+    height: "1 foot, 11 inches to 2 feet, 4 inches tall at the shoulder",
+    weight: "70 to 100 pounds",
+    life: "10 to 12 years",
+    breedGroup: "herding dogs",
 
-//     description:
-//       'At the end of the Beatles’ song "A Day in the Life," a high-pitched dog whistle was recorded by Paul McCartney for his sheepdog.',
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_1882.jpg",
-//     price: "31",
-//     id: 57,
-//     breed: "Bracco Italiano",
-//     name: "Ziggy",
-//     imageUrl: "https://images.dog.ceo/breeds/hound-afghan/n02088094_11006.jpg",
-//     price: "266",
+    id: "5eaff43af96b5978ca726d18",
+  },
 
-//     description:
-//       "Every dog on earth likely descended from a species knows as the Tomarctus – a creature that roamed the earth over 15 million years ago.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_1912.jpg",
-//     price: "734",
-//     id: 58,
-//     breed: "Briard",
-//     name: "Tyson",
-//     imageUrl: "https://images.dog.ceo/breeds/hound-afghan/n02088094_1007.jpg",
-//     price: "133",
+  {
+    breed: "brittany",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_22956_brittany-300x189.jpg",
+    description:
+      "Brittanys were bred as gundogs, and they definitely have birds on the brain. Although they’re often called Brittany Spaniels, the American Kennel Club dropped the word “spaniel” from this pointing breed’s name in 1982.",
 
-//     description:
-//       "In 1957, Laika became the first living being in space via an earth satellite and JFK’s terrier, Charlie, fathered 4 puppies with Laika’s daughter.",
-//   },
-//   {
-//     imageUrl: "https://images.dog.ceo/breeds/hound-walker/n02089867_1918.jpg",
-//     price: "217",
-//     id: 59,
-//     breed: "Brittany",
-//     name: "Simba",
-//     imageUrl: "https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg",
-//     price: "255",
+    height: "1 foot, 5 inches to 1 foot, 8 inches tall at the shoulder",
+    weight: "30 to 40 pounds",
+    life: "10 to 13 years",
+    breedGroup: "sporting dogs",
 
-//     description:
-//       "An elderly woman was saved by her 12-pound Yorkshire Terrier, who fought off an 80- pound Akita, and survived with only 9 stitches.",
-//   },
-// ];
+    id: "5eaff43af96b5978ca726d21",
+  },
+
+  {
+    breed: "bullmastiff",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_22918_bullmastiff-300x189.jpg",
+    description:
+      "The Bullmastiff dog breed is a firm and fearless family guardian. While standoffish toward strangers, they’ve got a soft spot for their loved ones.",
+
+    height: "24 to 27 inches at the shoulder",
+    weight: "100 to 130 pounds",
+    life: "8 to 10 years",
+    breedGroup: "working dogs",
+
+    id: "5eaff43af96b5978ca726d2a",
+  },
+  {
+    breed: "frengle",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2020/02/frengle-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Frengle is a mixed dog breed–a cross between the French Bulldog and Beagle dog breeds. Charismatic, affectionate, and even-tempered, these pups inherited some of the best qualities from both of their parents.",
+
+    height: "8 to 15 inches",
+    weight: "18 to 30 pounds",
+    life: "10 to 15 years",
+    breedGroup: "mixed breed dogs",
+
+    id: "5eaff43af96b5978ca726d7f",
+  },
+  {
+    breed: "german shorthaired pointer",
+    image:
+      "https://cdn2-www.dogtime.com/assets/uploads/2011/01/file_22976_german-shorthaired-pointer-300x189.jpg",
+    description:
+      "The versatile German Shorthaired Pointer sporting dog breed hunts many types of game, retrieves on land or from water, and is an affectionate companion. They have a striking, easy-care coat, but they need plenty of vigorous exercise.",
+
+    height: "1 foot, 9 inches to 2 feet, 1 inch tall at the shoulder",
+    weight: "45 to 70 pounds",
+    life: "12 to 15 years",
+    breedGroup: "sporting dogs",
+
+    id: "5eaff43af96b5978ca726d80",
+  },
+  {
+    breed: "german wirehaired pointer",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_22978_german-wirehaired-pointer-300x189.jpg",
+    description:
+      "The German Wirehaired Pointer was developed in the late 19th and early 20th centuries to be a versatile hunting dog breed, a job at which they still excel today. They can hunt any game on any terrain and point and retrieve from land or water.",
+
+    height: "1 foot, 10 inches to 2 feet, 2 inches tall at the shoulder",
+    weight: "60 to 70 pounds",
+    life: "12 to 14 years",
+    breedGroup: "sporting dogs",
+
+    id: "5eaff43af96b5978ca726d81",
+  },
+  {
+    breed: "cardigan welsh corgi",
+    image:
+      "https://cdn2-www.dogtime.com/assets/uploads/2011/11/file_23294_cardigan-welsh-corgi-300x189.jpg",
+    description:
+      "The Cardigan Welsh Corgi is the older of the two Corgi dog breeds, with dogs of this type believed to have existed in Wales for more than 3,000 years.",
+
+    height: "10 inches to 1 foot tall at the shoulder",
+    weight: "25 to 38 pounds",
+    life: "12 to 15 years",
+    breedGroup: "herding dogs",
+
+    id: "5eaff43af96b5978ca726d2e",
+  },
+  {
+    breed: "korean jindo dog",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2015/08/jindo-650x382.png",
+    description:
+      "Originating in South Korea, the Korean Jindo Dog exhibits unmatched loyalty. They are also incredibly intelligent dogs with a knack for hunting, tricks, and even agility. Fastidious and quiet indoors, they make great household pets and companions.",
+
+    height: "19½ to 21 inches for males and 18½ to 20 inches for females",
+    weight: "35 - 60 pounds",
+    life: "12 - 15 years",
+    breedGroup: "sporting dogs",
+
+    id: "5eaff43af96b5978ca726daa",
+  },
+  {
+    breed: "karelian bear dog",
+    image:
+      "https://cdn2-www.dogtime.com/assets/uploads/2018/04/karelian-bear-dog-header-650x368.jpg",
+    description:
+      "The Karelian Bear Dog, called Karjalankarhukoira in the breed’s native Finland, is a strong, alert, and fearless breed that is capable of hunting or treeing small-to-large game–even aggressive game such as bears, lynxes, wild boars, wolves, and moose. It makes the list of the top ten most common dog breeds in Finland, where people consider the Karelian Bear Dog a national treasure.",
+
+    height: "19 to 24 inches",
+    weight: "44 to 50 pounds",
+    life: "10 to 13 years",
+    breedGroup: "working dogs",
+
+    id: "5eaff43af96b5978ca726dab",
+  },
+  {
+    breed: "keeshond",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_23152_keeshond-300x189.jpg",
+    description:
+      "The Keeshond is an old dog breed, once a companion and watchdog on the barges and boats that traveled the canals and rivers of Holland in the 17th and 18th centuries. He’s almost exclusively a companion dog today. He’s a people-lover; willing to participate in all family activities, he thrives with people who expect this of their dog. He is lively, alert, and intelligent — qualities that won him status as the most beloved dog in Holland.",
+
+    height: "1 foot, 4 inches to 1 foot, 7 inches tall at the shoulder",
+    weight: "35 to 45 pounds",
+    life: "12 to 15 years",
+    breedGroup: "companion dogs",
+
+    id: "5eaff43af96b5978ca726da9",
+  },
+  {
+    breed: "jackshund",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2020/02/jackshund-mixed-dog-breed-pictures-COVER-650x368.jpg",
+    description:
+      "The Jackshund is a mixed breed dog–a cross between the Jack Russell Terrier and Dachshund dog breeds. Affectionate, lively, and playful, these pups inherited some of the best traits from two very different parents. The mix of different personalities and appearances will make for a fun, attractive dog!",
+
+    height: "8 to 23 inches",
+    weight: "15 to 28 pounds",
+    life: "12 to 15 years",
+    breedGroup: "mixed breed dogs",
+
+    id: "5eaff43af96b5978ca726dac",
+  },
+  {
+    breed: "kerry blue terrier",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_23070_kerry-blue-terrier-300x189.jpg",
+    description:
+      "The Kerry Blue Terrier is the quintessential working dog. He hails from County Kerry, Ireland, where he was bred to hunt small game and birds, kill rodents, and herd sheep and cattle. Intelligent and brave, he became a cherished pet as well, displaying fierce devotion to his family or pack. While not a particularly well-known dog breed, the Kerry Blue enjoys a dedicated following of fanciers, thanks to his working abilities and loyal companionship.",
+
+    height: "1 foot, 5 inches to 1 foot, 7 inches tall at the shoulder",
+    weight: "33 to 40 pounds",
+    life: "12 to 15 years",
+    breedGroup: "terrier dogs",
+
+    id: "5eaff43af96b5978ca726dad",
+  },
+  {
+    breed: "kuvasz",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_22932_kuvasz-300x189.jpg",
+    description:
+      "The Kuvasz is a large, white, flock-guarding dog who hails from Hungary. A one-family dog, they’re protective of their people and suspicious of strangers. Dogs of this breed think for themselves and can be challenging to train.",
+
+    height: "26 to 30 inches tall at the shoulder",
+    weight: "70 to 115 pounds",
+    life: "10 to 12 years",
+    breedGroup: "working dogs",
+
+    id: "5eaff43af96b5978ca726dae",
+  },
+  {
+    breed: "shih tzu",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_23126_shih-tzu-300x189.jpg",
+    description:
+      "The name “Shih Tzu” means little lion, but there’s nothing fierce about this dog breed. This pooch is a lover, not a hunter.",
+
+    height: "9 to 10 inches tall at the shoulder",
+    weight: "9 to 16 pounds",
+    life: "10 to 16 years",
+    breedGroup: "companion dogs",
+
+    id: "5eaff43af96b5978ca726e0a",
+  },
+  {
+    breed: "shih-poo",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2019/07/shih-poo-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Shih-Poo is a mixed breed dog–a cross between the Shih Tzu and Toy Poodle dog breeds. Small, hypoallergenic and cuddly companions, these pups inherited some of the best qualities from both of their parents.",
+
+    height: "8 to 18 inches",
+    weight: "8 to 18 pounds",
+    life: "13 to 17+ years",
+    breedGroup: "mixed breed dogs",
+
+    id: "5eaff43af96b5978ca726e09",
+  },
+  {
+    breed: "shiloh shepherd",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2020/03/shiloh-shepherd-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Shiloh Shepherd is an intelligent companion dog who responds well to training. Their gentle personality makes them excellent service dogs or therapy dogs. They’re very similar in appearance to a German Shepherd Dogs, but larger.",
+
+    height: "26 to 30 inches",
+    weight: "80 to 130 pounds",
+    life: "9 to 14 years",
+    breedGroup: "working dogs",
+
+    id: "5eaff43af96b5978ca726e0c",
+  },
+  {
+    breed: "shiranian",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2019/09/shiranian-mixed-dog-breed-pictures-cover-650x368.jpg",
+    description:
+      "The Shiranian is a mixed breed dog–a cross between the Shih Tzu and Pomeranian breeds. Small, adorable, and loyal, these pups inherited some of the best qualities from both of their parents.",
+
+    height: "7 to 12 inches",
+    weight: "4 to 16 pounds",
+    life: "12 to 16 years",
+    breedGroup: "mixed breed dogs",
+
+    id: "5eaff43af96b5978ca726e0d",
+  },
+  {
+    breed: "yorkipoo",
+    image:
+      "https://cdn3-www.dogtime.com/assets/uploads/2011/01/file_23208_yorkipoo-300x189.jpg",
+    description:
+      "A fun-loving “designer dog” — and therefore a mixed dog breed — a Yorkipoo is a cross between the Yorkshire Terrier and a Toy or Miniature Poodle. Intelligent, affectionate, and gentle, he makes a delightful companion and is perfectly suited to apartment life, especially if you don’t mind the barking. He has plenty of energy to be burned off and he loves to play when he’s not parked on your lap watching the world go by. His ability to run fast and jump high can be surprising to those who aren’t expecting a canine Superman in miniature.",
+
+      height: "7 inches to 1 foot, 3 inches tall at the shoulder",
+      weight: "3 to 14 pounds",
+      life: "10 to 15 years",
+      breedGroup: "hybrid dogs",
+    
+    id: "5eaff43af96b5978ca726e31",
+  },
+  {
+    breed: "whippet",
+    image:
+      "https://cdn1-www.dogtime.com/assets/uploads/2011/01/file_23048_whippet-300x189.jpg",
+    description:
+      "The Whippet dog breed was a poacher’s best friend, speedily going after rabbits and other small game. Today the Whippet competes in agility, flyball, lure coursing, rally, and obedience and is a loving therapy dog. His unique nature, friendly personality, and stylish look make him a favorite as a family companion as well as in the show ring.",
+
+      height: "1 foot, 6 inches to 1 foot, 10 inches tall at the shoulder",
+      weight: "18 to 48 pounds",
+      life: "12 to 15 years",
+      breedGroup: "hound dogs",
+    
+    id: "5eaff43af96b5978ca726e2b",
+  },
+ 
+];
 const projects = [
   {
     id: 1,
@@ -999,9 +993,9 @@ app.get("/projects", (req, res) => {
   res.status(200).json(projects);
 });
 
-// app.get("/v1/dogs", (req, res) => {
-//   res.status(200).json(dogs);
-// });
+app.get("/v1/dogs", (req, res) => {
+  res.status(200).json(dogs);
+});
 app.get("/team", (req, res) => {
   res.status(200).json(team);
 });
